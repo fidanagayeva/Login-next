@@ -16,7 +16,7 @@ const CardPage = () => {
   };
 
   const navigateToDashboard = () => {
-    router.push("/dashboard"); // Navigate back to the dashboard page
+    router.push("/dashboard"); 
   };
 
   return (
@@ -52,23 +52,7 @@ const CardPage = () => {
           </button>
         </div>
 
-        <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">Cards</h1>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white p-4 rounded-md shadow-md">
-              <h2 className="text-xl font-semibold">Card 1</h2>
-              <p>This is card 1 description.</p>
-            </div>
-            <div className="bg-white p-4 rounded-md shadow-md">
-              <h2 className="text-xl font-semibold">Card 2</h2>
-              <p>This is card 2 description.</p>
-            </div>
-            <div className="bg-white p-4 rounded-md shadow-md">
-              <h2 className="text-xl font-semibold">Card 3</h2>
-              <p>This is card 3 description.</p>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
