@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
 import { useRequestMutation } from "./_http/axiosFetcher";
 import CustomButtonLoading from "./_components/CustomLoadingButton";
 import { useFormik } from "formik";
 import { LoginValidationSchema } from "./_validator/LoginValidation";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { FiUser, FiLock } from "react-icons/fi";
 
 export default function Home() {
   const router = useRouter();
@@ -45,49 +45,58 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {isErr && (
-        <button className="bg-red-200 text-red-500 px-4 py-2 rounded-md">
-          {isErr.message}
-        </button>
-      )}
-      <form
-        id="login"
-        onSubmit={formik.handleSubmit}
-        className="max-w-[700px] w-full my-5 rounded-md p-5 shadow-md"
-      >
-        <input
-          type="text"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          name="username"
-          placeholder="Username"
-          className="w-full px-4 py-3 my-2 outline-none shadow-md rounded-md border border-gray-300"
-        />{" "}
-        {formik.errors.username && formik.touched.username ? (
-          <p className="text-red-500 text-sm">{formik.errors.username}</p>
-        ) : null}
-        <input
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          name="password"
-          placeholder="Password"
-          className="w-full px-4 py-3 my-3 outline-none shadow-md rounded-md border border-gray-300"
-        />
-        {formik.errors.password && formik.touched.password ? (
-          <p className="text-red-500 text-sm">{formik.errors.password}</p>
-        ) : null}
-        <button
-          type="submit"
-          id="login"
-          className="w-full flex items-center justify-center gap-2 p-3 my-2 bg-blue-500 text-white rounded-sm shadow-md"
-        >
-          {loaading ? <CustomButtonLoading /> : "Login"}
-        </button>
-      </form>
+    <main className="flex min-h-screen bg-gradient-to-r from-white via-gray-200 to-gray-900">
+      <div className="w-1/2 min-h-screen"></div>
+      <div className="w-1/2 min-h-screen"></div>
+      
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3/4 md:w-2/3 lg:w-1/2 flex shadow-lg">
+        <div className="w-1/2 bg-black p-8 flex flex-col justify-center text-white">
+          <h1 className="text-5xl font-bold mb-4">Welcome</h1>
+          <p className="text-2xl mb-2">to the site 🎉</p>
+        </div>
+        <div className="w-1/2 bg-white p-8 flex flex-col justify-center">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Login Here!</h2>
+          <form id="login" onSubmit={formik.handleSubmit}>
+            <div className="relative mb-4">
+              <FiUser className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
+              <input
+                type="text"
+                value={formik.values.username}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                name="username"
+                placeholder="username"
+                className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:border-gray-400"
+              />
+              {formik.errors.username && formik.touched.username ? (
+                <p className="text-red-500 text-sm mt-2">{formik.errors.username}</p>
+              ) : null}
+            </div>
+            <div className="relative mb-6">
+              <FiLock className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
+              <input
+                type="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                name="password"
+                placeholder="password"
+                className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:border-gray-400"
+              />
+              {formik.errors.password && formik.touched.password ? (
+                <p className="text-red-500 text-sm mt-2">{formik.errors.password}</p>
+              ) : null}
+            </div>
+            <button
+              type="submit"
+              id="login"
+              className="w-full flex items-center justify-center gap-2 p-3 bg-gray-800 text-white rounded-full shadow-md"
+            >
+              {loaading ? <CustomButtonLoading /> : "LOGIN"}
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }
