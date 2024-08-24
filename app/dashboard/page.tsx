@@ -1,12 +1,11 @@
 "use client";
-import Image from "next/image";
 import React from "react";
-import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { getCookie, setCookie } from "cookies-next";
 import { useRequest } from "../_http/axiosFetcher";
 import CustomButtonLoading from "../_components/CustomLoadingButton";
-const page = () => {
+
+const Page = () => {
   const router = useRouter();
   const { data, isLoading, error } = useRequest("user", {
     module: "devApi",
@@ -16,8 +15,7 @@ const page = () => {
     },
   });
 
-  const [blur, setBlur] = React.useState(true);
-  const handleLogut = () => {
+  const handleLogout = () => {
     localStorage.removeItem("user");
     setCookie("token", "", {
       expires: new Date(Date.now()),
@@ -25,51 +23,93 @@ const page = () => {
 
     router.push("/");
   };
+
+  const navigateToCardPage = () => {
+    router.push("/dashboard/card"); 
+  };
+
   return (
-    <div>
-      {isLoading && <CustomButtonLoading />}
-      <div className="bg-black flex justify-end items-center text-white p-3 rounded-md">
-        <Image
-          alt="user-image"
-          onLoad={() => setBlur(false)}
-          className={clsx("rounded-full", blur ? "filter blur-md" : "")}
-          src={data?.image}
-          width={50}
-          height={50}
-        />
-        <button className="bg-blue-400 rounded-xl w-12 h-12 text-white">
-          {data && data?.firstName.charAt(0)}
-          {data && data?.lastName.charAt(0)}
-        </button>
-        <button
-          onClick={handleLogut}
-          className="mx-5 bg-red-200 text-red-500 px-4 py-2 rounded-md"
-        >
-          LogOut
-        </button>
+    <div className="flex">
+      <div className="w-1/6 h-screen bg-black p-4 text-white">
+        <h2 className="text-lg font-bold mb-6">Dashboard</h2>
+        <ul className="space-y-4">
+          <li className="font-semibold cursor-pointer" onClick={navigateToCardPage}>
+            Card
+          </li>
+          <li>Tables</li>
+          <li>Virtual Reality</li>
+          <li>RTL</li>
+          <li className="font-bold mt-6">Account Pages</li>
+          <li>Profile</li>
+          <li>Sign In</li>
+          <li>Sign Up</li>
+        </ul>
+        <div className="mt-auto">
+          <p className="text-gray-400">Need help?</p>
+          <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md">
+            Documentation
+          </button>
+        </div>
       </div>
-      {error && (
-        <button className="my-5 bg-red-100 text-red-500 px-4 py-2 rounded-md">
-          {error.message}
-        </button>
-      )}
-      <Image
-        onLoad={() =>
-          setTimeout(() => {
-            setBlur(false);
-          }, 5000)
-        }
-        className={clsx("rounded-full", blur ? "filter blur-md" : "")}
-        src={data?.image}
-        width={350}
-        height={350}
-      />
-      <h1>
-        {data && data?.role}///
-        {data && data?.university}
-      </h1>
+
+      <div className="flex-1 p-4">
+        <div className="bg-gradient-to-r from-black via-white to-black flex justify-end items-center text-white p-3 rounded-md mb-4">
+          <button
+            onClick={handleLogout}
+            className="mx-5 bg-white text-black px-4 py-2 rounded-md"
+          >
+            LogOut
+          </button>
+        </div>
+
+        <div className="p-4">
+          {isLoading ? (
+            <CustomButtonLoading />
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border-collapse border border-gray-300">
+                <thead>
+                  <tr>
+                    <th className="p-2 border border-gray-300">Name</th>
+                    <th className="p-2 border border-gray-300">Position</th>
+                    <th className="p-2 border border-gray-300">Office</th>
+                    <th className="p-2 border border-gray-300">Age</th>
+                    <th className="p-2 border border-gray-300">Start date</th>
+                    <th className="p-2 border border-gray-300">Salary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array.isArray(data) && data.length > 0 ? (
+                    data.map((item) => (
+                      <tr key={item.id}>
+                        <td className="p-2 border border-gray-300">{item.name}</td>
+                        <td className="p-2 border border-gray-300">{item.position}</td>
+                        <td className="p-2 border border-gray-300">{item.office}</td>
+                        <td className="p-2 border border-gray-300">{item.age}</td>
+                        <td className="p-2 border border-gray-300">{item.startDate}</td>
+                        <td className="p-2 border border-gray-300">{item.salary}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={6} className="p-2 text-center text-gray-500">
+                        No data available
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {error && (
+            <button className="my-5 bg-red-100 text-red-500 px-4 py-2 rounded-md">
+              {error.message}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
