@@ -1,10 +1,13 @@
 "use client";
+
 import React from "react";
 import { useRouter } from "next/navigation";
-import { getCookie, setCookie } from "cookies-next";
+import { useData } from "../../context/DataContext";
+import { setCookie } from "cookies-next"; 
 
 const CardPage = () => {
   const router = useRouter();
+  const { data } = useData();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -16,7 +19,7 @@ const CardPage = () => {
   };
 
   const navigateToDashboard = () => {
-    router.push("/dashboard"); 
+    router.push("/dashboard");
   };
 
   return (
@@ -36,9 +39,6 @@ const CardPage = () => {
         </ul>
         <div className="mt-auto">
           <p className="text-gray-400">Need help?</p>
-          <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md">
-            Documentation
-          </button>
         </div>
       </div>
 
@@ -52,7 +52,28 @@ const CardPage = () => {
           </button>
         </div>
 
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white p-4 rounded-md shadow-md w-80"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="h-44 w-full object-cover rounded-md"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-bold mb-2">{item.name}</h3>
+                <p>Position: {item.position}</p>
+                <p>Office: {item.office}</p>
+                <p>Age: {item.age}</p>
+                <p>Start Date: {item.startDate}</p>
+                <p>Salary: {item.salary}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
