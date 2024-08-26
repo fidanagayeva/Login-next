@@ -104,6 +104,7 @@ const Page = () => {
   const handleDelete = async (id) => {
     setData(data.filter((item) => item.id !== id));
     
+
     try {
       await fetch(`http://localhost:3001/data/${id}`, {
         method: 'DELETE',
