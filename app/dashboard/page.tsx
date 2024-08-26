@@ -22,7 +22,6 @@ const Page = () => {
     salary: "",
   });
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,7 +66,7 @@ const Page = () => {
     setShowModal(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const { image, name, position, office, age, startDate, salary } = currentData;
 
     if (!image || !name || !position || !office || !age || !startDate || !salary) {
@@ -75,20 +74,43 @@ const Page = () => {
       return;
     }
 
+    let updatedData = [];
+
     if (currentData.id) {
-      setData(
-        data.map((item) =>
-          item.id === currentData.id ? { ...item, ...currentData } : item
-        )
+      updatedData = data.map((item) =>
+        item.id === currentData.id ? { ...item, ...currentData } : item
       );
     } else {
-      setData([...data, { ...currentData, id: Date.now() }]);
+      const newData = { ...currentData, id: Date.now() };
+      updatedData = [...data, newData];
+      
+      try {
+        await fetch('http://localhost:3001/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newData),
+        });
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
     }
+
+    setData(updatedData);
     setShowModal(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     setData(data.filter((item) => item.id !== id));
+    
+    try {
+      await fetch(`http://localhost:3001/data/${id}`, {
+        method: 'DELETE',
+      });
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
   };
 
   const handleEdit = (item) => {
