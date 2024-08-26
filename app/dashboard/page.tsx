@@ -44,6 +44,36 @@ const Page = () => {
       startDate: "2022-03-10",
       salary: "$90,000",
     },
+    {
+      id: 4,
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYkpAMeQ7efqBOQKrfmaR28jcKnHZgK5cQ9w&s",
+      name: "Alice Johnson",
+      position: "UI/UX Designer",
+      office: "Los Angeles",
+      age: 26,
+      startDate: "2022-03-10",
+      salary: "$90,000",
+    },
+    {
+      id: 5,
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnWUqU58jhSb6ayaw6uERDdC2aPAxzoAtWwA&s",
+      name: "Alice Johnson",
+      position: "UI/UX Designer",
+      office: "Los Angeles",
+      age: 26,
+      startDate: "2022-03-10",
+      salary: "$90,000",
+    },
+    {
+      id: 6,
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDpaPJD7pvji8R3t6_VCfaSmkz6wKxL3nVOg&s",
+      name: "Alice Johnson",
+      position: "UI/UX Designer",
+      office: "Los Angeles",
+      age: 26,
+      startDate: "2022-03-10",
+      salary: "$90,000",
+    },
   ];
 
   const [showModal, setShowModal] = useState(false);
