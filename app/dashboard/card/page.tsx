@@ -1,13 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useData } from "../../context/DataContext";
 import { setCookie } from "cookies-next";
 
 const CardPage = () => {
   const router = useRouter();
-  const { data } = useData();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/data');
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+        } else {
+          console.error('Failed to fetch data from API');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -76,7 +93,6 @@ const CardPage = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
