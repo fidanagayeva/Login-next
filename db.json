@@ -72,6 +72,16 @@
       "age": "7",
       "startDate": "2024-08-27",
       "salary": "7"
+    },
+    {
+      "id": 1724683969035,
+      "image": "blob:http://localhost:3000/95e0d1e6-6fe7-4d63-a2fa-daea5d43aaee",
+      "name": "d",
+      "position": "dd",
+      "office": "d",
+      "age": "7",
+      "startDate": "2024-08-26",
+      "salary": "7"
     }
   ]
 }
