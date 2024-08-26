@@ -11,7 +11,7 @@ import { setCookie } from "cookies-next";
 
 const Page = () => {
   const router = useRouter();
-  const { data, setData } = useData(); 
+  const { data, setData } = useData();
 
   const initialData = [
     {
@@ -153,8 +153,8 @@ const Page = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/6 h-screen bg-black p-4 text-white">
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-1/6 h-screen bg-black p-4 text-white">
         <h2 className="text-lg font-bold mb-6">Dashboard</h2>
         <ul className="space-y-4">
           <li className="font-semibold cursor-pointer" onClick={() => router.push("/dashboard/card")}>
@@ -176,16 +176,16 @@ const Page = () => {
       </div>
 
       <div className="flex-1 p-4">
-        <div className="bg-gradient-to-r from-black via-white to-black flex justify-end items-center text-white p-3 rounded-md mb-4">
+        <div className="bg-gradient-to-r from-black via-white to-black flex flex-col md:flex-row justify-end items-center text-white p-3 rounded-md mb-4">
           <button
             onClick={handleLogout}
-            className="mx-5 bg-white text-black px-4 py-2 rounded-md"
+            className="w-full md:w-auto mx-5 bg-white text-black px-4 py-2 rounded-md"
           >
             LogOut
           </button>
           <button
             onClick={handleCreate}
-            className="mx-5 bg-white text-black px-4 py-2 rounded-md"
+            className="w-full md:w-auto mx-5 bg-white text-black px-4 py-2 rounded-md mt-4 md:mt-0"
           >
             Create
           </button>
@@ -196,28 +196,28 @@ const Page = () => {
             <table className="min-w-full bg-white border-collapse border border-gray-300">
               <thead>
                 <tr>
-                  <th className="p-2 border border-gray-300">Image</th>
-                  <th className="p-2 border border-gray-300">Name</th>
-                  <th className="p-2 border border-gray-300">Position</th>
-                  <th className="p-2 border border-gray-300">Office</th>
-                  <th className="p-2 border border-gray-300">Age</th>
-                  <th className="p-2 border border-gray-300">Start date</th>
-                  <th className="p-2 border border-gray-300">Salary</th>
-                  <th className="p-2 border border-gray-300">Actions</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Image</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Name</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Position</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Office</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Age</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Start date</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Salary</th>
+                  <th className="p-2 border border-gray-300 whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item) => (
                   <tr key={item.id}>
-                    <td className="p-2 border border-gray-300">
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">
                       <img src={item.image} alt={item.name} className="h-10 w-10 object-cover" />
                     </td>
-                    <td className="p-2 border border-gray-300">{item.name}</td>
-                    <td className="p-2 border border-gray-300">{item.position}</td>
-                    <td className="p-2 border border-gray-300">{item.office}</td>
-                    <td className="p-2 border border-gray-300">{item.age}</td>
-                    <td className="p-2 border border-gray-300">{item.startDate}</td>
-                    <td className="p-2 border border-gray-300">{item.salary}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.name}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.position}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.office}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.age}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.startDate}</td>
+                    <td className="p-2 border border-gray-300 whitespace-nowrap">{item.salary}</td>
                     <td className="p-2 border-l border-r border-t flex space-x-2">
                       <button
                         className="text-black px-5 py-0 rounded-md focus:outline-none focus:ring-0"
@@ -256,6 +256,7 @@ const Page = () => {
 
       <ToastContainer />
     </div>
+
   );
 };
 

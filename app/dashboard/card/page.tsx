@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useData } from "../../context/DataContext";
-import { setCookie } from "cookies-next"; 
+import { setCookie } from "cookies-next";
 
 const CardPage = () => {
   const router = useRouter();
@@ -23,8 +23,8 @@ const CardPage = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/6 h-screen bg-black p-4 text-white">
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-1/6 h-screen bg-black p-4 text-white">
         <h2 className="text-lg font-bold mb-6">Dashboard</h2>
         <ul className="space-y-4">
           <li className="cursor-pointer" onClick={navigateToDashboard}>
@@ -56,7 +56,7 @@ const CardPage = () => {
           {data.map((item) => (
             <div
               key={item.id}
-              className="bg-white p-4 rounded-md shadow-md w-80"
+              className="bg-white p-4 rounded-md shadow-md"
             >
               <img
                 src={item.image}
@@ -76,6 +76,7 @@ const CardPage = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

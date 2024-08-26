@@ -45,16 +45,16 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen bg-gradient-to-r from-white via-gray-200 to-gray-900">
-      <div className="w-1/2 min-h-screen"></div>
-      <div className="w-1/2 min-h-screen"></div>
-      
-      <div className="absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3/4 md:w-2/3 lg:w-1/2 flex shadow-lg">
-        <div className="w-1/2 bg-black p-8 flex flex-col justify-center text-white">
+    <main className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-white via-gray-200 to-gray-900">
+      <div className="w-full md:w-1/2 min-h-screen"></div>
+      <div className="w-full md:w-1/2 min-h-screen"></div>
+
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-11/12 sm:w-3/4 md:w-2/3 lg:w-1/2 flex flex-col md:flex-row shadow-lg">
+        <div className="w-full md:w-1/2 bg-black p-8 flex flex-col justify-center text-white">
           <h1 className="text-5xl font-bold mb-4">Welcome</h1>
           <p className="text-2xl mb-2">to the site 🎉</p>
         </div>
-        <div className="w-1/2 bg-white p-8 flex flex-col justify-center">
+        <div className="w-full md:w-1/2 bg-white p-8 flex flex-col justify-center">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Login Here!</h2>
           <form id="login" onSubmit={formik.handleSubmit}>
             <div className="relative mb-4">
@@ -98,5 +98,6 @@ export default function Home() {
         </div>
       </div>
     </main>
+
   );
 }
